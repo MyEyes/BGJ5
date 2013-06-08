@@ -113,6 +113,7 @@
     <Compile Include="Game Over Screen.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameScreen.cs" />
+    <Compile Include="IntroScreen.cs" />
     <Compile Include="IScreen.cs" />
     <Compile Include="Lightmap.cs" />
     <Compile Include="LightParticle.cs" />

@@ -43,6 +43,12 @@ namespace Bacon_Game_Jam_5
                         Health = MaxHealth;
             }
 
+            if (Health < 0)
+            {
+                _map.Objects.Remove(this);
+                light.Radius = 0;
+            }
+
 
             base.Update(seconds);
         }

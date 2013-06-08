@@ -51,7 +51,7 @@ namespace Bacon_Game_Jam_5
 
             manager = new ScreenManager(GraphicsDevice, Content);
 
-            manager.Add(new GameScreen());
+            manager.Add(new IntroScreen());
             // TODO: use this.Content to load your game content here
         }
 

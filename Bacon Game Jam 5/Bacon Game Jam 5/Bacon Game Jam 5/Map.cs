@@ -45,7 +45,7 @@ namespace Bacon_Game_Jam_5
                 for (int y = 0; y < SizeY; y++)
                 {
                     _tiles[0][x,y] = new Tile(0, x, y);
-                    if (rand.NextDouble()>0.95)
+                    if (rand.NextDouble() > 0.95 && x != 1 && x != 2 && y != 1 && y != 2)
                         _tiles[1][x, y] = new Tile(1, x, y);
                 }
 

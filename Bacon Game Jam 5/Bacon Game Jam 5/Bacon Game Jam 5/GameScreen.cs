@@ -41,7 +41,7 @@ namespace Bacon_Game_Jam_5
             for (int x = 0; x < 15; x++)
             {
                 int offset = 30*Map.TileSize;
-                Enemy enemy = new Enemy(new Vector2(offset + (float)rand.NextDouble() * (Map.SizeX * Map.TileSize - 2 * offset), offset + (float)rand.NextDouble() * (Map.SizeY * Map.TileSize - offset * 2)), map, Content);
+                Enemy enemy = new Enemy(new Vector2(offset + (float)rand.NextDouble() * (Map.SizeX * Map.TileSize - offset), offset + (float)rand.NextDouble() * (Map.SizeY * Map.TileSize - offset)), map, Content);
                 map.Objects.Add(enemy);
             }
              /*
@@ -67,16 +67,17 @@ namespace Bacon_Game_Jam_5
         public void Update(float seconds)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            map.Update(seconds);
 
             if (keyboard.IsKeyDown(Keys.A))
-                player.Move(new Vector2(-1.5f, 0));
+                player.Move(new Vector2(-2.5f, 0));
             if (keyboard.IsKeyDown(Keys.D))
-                player.Move(new Vector2(1.5f, 0));
+                player.Move(new Vector2(2.5f, 0));
             if (keyboard.IsKeyDown(Keys.W))
-                player.Move(new Vector2(0, -1.5f));
+                player.Move(new Vector2(0, -2.5f));
             if (keyboard.IsKeyDown(Keys.S))
-                player.Move(new Vector2(0, 1.5f));
+                player.Move(new Vector2(0, 2.5f));
+
+            map.Update(seconds);
 
             if (player.Health < 0)
             {

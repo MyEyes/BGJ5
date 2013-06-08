@@ -21,8 +21,12 @@ namespace Bacon_Game_Jam_5
         public float Health = 5000;
         EnemyMode mode;
 
-        Vector2 targetPos = Vector2.Zero;
-        float countDown = 0;
+        public Vector2 targetPos = Vector2.Zero;
+        public float countDown = 0;
+        public float speed = 0.5f;
+        public bool follow = true;
+
+        public bool collides = true;
 
         public Enemy(Vector2 pos, Map map, ContentManager Content):base(map,Content)
         {
@@ -34,6 +38,14 @@ namespace Bacon_Game_Jam_5
             Position = pos;
             mode = EnemyMode.RandomWalk;
             NewTargetPos();
+        }
+
+        public override void Move(Vector2 diff)
+        {
+            if (collides)
+                base.Move(diff);
+            else
+                Position += diff;
         }
 
         public override void Update(float seconds)
@@ -60,7 +72,11 @@ namespace Bacon_Game_Jam_5
                     dir *= 5;
                     AntiLightParticle alp = new AntiLightParticle(Position, dir, p, _map, null);
                     _map.Objects.Add(alp);
-                    targetPos = p.Position;
+                    if (follow)
+                    {
+                        targetPos = p.Position;
+                        countDown = 2 * (targetPos - Position).Length() / 60.0f;
+                    }
                 }
             }
 
@@ -73,7 +89,7 @@ namespace Bacon_Game_Jam_5
                     {
                         Vector2 dir = targetPos - Position;
                         dir.Normalize();
-                        dir /= 2;
+                        dir *= speed;
                         Move(new Vector2(dir.X, 0));
                         Move(new Vector2(0, dir.Y));
                         countDown -= seconds;

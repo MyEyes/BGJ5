@@ -22,7 +22,7 @@ namespace Bacon_Game_Jam_5
             _map = map;
         }
 
-        public void Move(Vector2 diff)
+        public virtual void Move(Vector2 diff)
         {
             Position += diff;
             if (_map.Collides(this))
