@@ -29,7 +29,7 @@ namespace Bacon_Game_Jam_5
 
     public class Lightmap
     {
-        const int MaxLights = 1024;
+        const int MaxLights = 2048;
         Light[] _lights = new Light[MaxLights];
 
         Light[] _antiLights = new Light[MaxLights];

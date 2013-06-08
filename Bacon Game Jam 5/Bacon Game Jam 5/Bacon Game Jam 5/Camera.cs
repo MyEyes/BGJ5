@@ -45,5 +45,10 @@ namespace Bacon_Game_Jam_5
         {
             get { return new Rectangle((int)_position.X - _screenSize.Width / 2 - 1, (int)_position.Y - _screenSize.Height / 2 - 1, _screenSize.Width + 2, _screenSize.Height + 2); }
         }
+
+        public Vector2 Position
+        {
+            get { return _position; }
+        }
     }
 }

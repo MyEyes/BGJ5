@@ -11,13 +11,22 @@
       <Time>2013-06-08T12:33:51.105896+02:00</Time>
     </Item>
     <Item>
+      <Source>ShatterEffect.fx</Source>
+      <Name>ShatterEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\ShatterEffect.xnb</Output>
+      <Time>2013-06-08T20:50:46.4524463+02:00</Time>
+    </Item>
+    <Item>
       <Source>TileSet.png</Source>
       <Name>TileSet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\TileSet.xnb</Output>
-      <Time>2013-06-08T03:07:21.093461+02:00</Time>
+      <Time>2013-06-08T21:19:53.8114034+02:00</Time>
     </Item>
     <Item>
       <Source>noise.png</Source>
@@ -27,6 +36,15 @@
       <Options>None</Options>
       <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\noise.xnb</Output>
       <Time>2013-06-08T03:50:13.0205561+02:00</Time>
+    </Item>
+    <Item>
+      <Source>font.spritefont</Source>
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\font.xnb</Output>
+      <Time>2013-06-08T19:52:30.1524621+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

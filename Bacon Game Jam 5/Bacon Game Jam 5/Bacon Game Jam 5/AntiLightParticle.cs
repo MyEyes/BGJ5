@@ -67,7 +67,8 @@ namespace Bacon_Game_Jam_5
         public void Done()
         {
             _map.Objects.Remove(this);
-            light.Radius = 0;
+            if (light != null)
+                light.Radius = 0;
         }
     }
 }

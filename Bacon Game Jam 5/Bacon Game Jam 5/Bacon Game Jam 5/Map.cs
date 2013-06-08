@@ -24,8 +24,8 @@ namespace Bacon_Game_Jam_5
     {
         Texture2D _tileSet;
         Tile[][,] _tiles;
-        public const int SizeX = 300;
-        public const int SizeY = 300;
+        public const int SizeX = 150;
+        public const int SizeY = 150;
 
         public Lightmap lightMap;
 
@@ -62,11 +62,11 @@ namespace Bacon_Game_Jam_5
             if (startY < 0) startY = 0;
             if (startY >= SizeY) startY = SizeY - 1;
 
-            int endX = cam.ViewSpace.Width / TileSize + startX;
-            if (endX > SizeX) endX = SizeX - 1;
+            int endX = cam.ViewSpace.Width / TileSize + startX + 2;
+            if (endX >= SizeX) endX = SizeX - 1;
 
-            int endY = cam.ViewSpace.Height / TileSize + startY;
-            if (endY > SizeY) endY = SizeY - 1;
+            int endY = cam.ViewSpace.Height / TileSize + startY + 2;
+            if (endY >= SizeY) endY = SizeY - 1;
 
             batch.Begin(SpriteSortMode.Immediate, blend, null, DepthStencilState.Default, null, null, cam.ViewMatrix);
 
@@ -98,11 +98,11 @@ namespace Bacon_Game_Jam_5
             if (startY < 0) startY = 0;
             if (startY >= SizeY) startY = SizeY - 1;
 
-            int endX = obj.BoundingRect.Width / TileSize + startX+1;
-            if (endX > SizeX) endX = SizeX - 1;
+            int endX = obj.BoundingRect.Width / TileSize + startX+2;
+            if (endX >= SizeX) endX = SizeX - 1;
 
-            int endY = obj.BoundingRect.Height / TileSize + startY+1;
-            if (endY > SizeY) endY = SizeY - 1;
+            int endY = obj.BoundingRect.Height / TileSize + startY+2;
+            if (endY >= SizeY) endY = SizeY - 1;
             for (int x = startX; x <= endX; x++)
                 for (int y = startY; y <= endY; y++)
                     if (_tiles[1][x, y] != null && obj.BoundingRect.Intersects(_tiles[1][x, y].TargetRect))
@@ -115,9 +115,9 @@ namespace Bacon_Game_Jam_5
             Vector2 center = pos;
             Rectangle drawRect = viewSpace;
             //Calculate minimal and maximal tile index to consider for shadow calculation
-            int minX = (int)(pos.X / TileSize) - drawRect.Width / 2;
+            int minX = (int)((pos.X - drawRect.Width / 2) / TileSize);
             minX = minX >= 0 ? minX : 0;
-            int minY = (int)(pos.Y / TileSize) - drawRect.Height / 2;
+            int minY = (int)((pos.Y-drawRect.Height/2) / TileSize);
             minY = minY >= 0 ? minY : 0;
             int maxX = (drawRect.Width + drawRect.X) / TileSize + 1;
             maxX = maxX < _tiles[1].GetLength(0) ? maxX : _tiles[1].GetLength(0);
@@ -242,6 +242,10 @@ namespace Bacon_Game_Jam_5
                             0, 6, VertexPositionColor.VertexDeclaration.VertexStride);
                             vertexCount += 6;
                         }
+                        else
+                        {
+
+                        }
 
                         if (vertexCount < shadowVB.VertexCount)// && Vector3.Dot((edge3 + edge4) / 2 - new Vector3(center, 0), new Vector3(-(edge4 - edge3).Y, (edge4 - edge3).X, 0)) < 0)
                         {
@@ -256,6 +260,23 @@ namespace Bacon_Game_Jam_5
                             new VertexPositionColor(edge4+dir2*stretch,Color.White),
                             new VertexPositionColor(edge3,Color.Black),
                             new VertexPositionColor(edge4,Color.Black),
+                            },
+                            0, 6, VertexPositionColor.VertexDeclaration.VertexStride);
+                            vertexCount += 6;
+                        }
+                        if (vertexCount < shadowVB.VertexCount)// && Vector3.Dot((edge4 + edge1) / 2 - new Vector3(center, 0), new Vector3(-(edge1 - edge4).Y, (edge1 - edge4).X, 0)) < 0)
+                        {
+                            dir1 = edge4 - new Vector3(center, depth);
+                            dir1.Normalize();
+                            dir2 = edge1 - new Vector3(center, depth);
+                            dir2.Normalize();
+                            shadowVB.SetData<VertexPositionColor>(vertexCount * VertexPositionColor.VertexDeclaration.VertexStride, new VertexPositionColor[]{
+                            new VertexPositionColor(edge4+dir1*stretch,Color.White),
+                            new VertexPositionColor(edge4+Vector3.Transform(dir1,Lightmap.rotateRight)*stretch, Color.Black),
+                            new VertexPositionColor(edge1+Vector3.Transform(dir2,Lightmap.rotateLeft)*stretch, Color.Black),
+                            new VertexPositionColor(edge1+dir2*stretch,Color.White),
+                            new VertexPositionColor(edge4,Color.Black),
+                            new VertexPositionColor(edge1,Color.Black),
                             },
                             0, 6, VertexPositionColor.VertexDeclaration.VertexStride);
                             vertexCount += 6;

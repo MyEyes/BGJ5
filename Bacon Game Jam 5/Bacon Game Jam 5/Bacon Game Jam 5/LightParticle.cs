@@ -14,8 +14,9 @@ namespace Bacon_Game_Jam_5
         GameObject _target;
         float countdown;
         Light light;
+        Color _color;
 
-        public LightParticle(Vector2 position, Vector2 direction, GameObject target, Map map, ContentManager Content)
+        public LightParticle(Vector2 position, Vector2 direction, GameObject target, Color color, Map map, ContentManager Content)
             : base(map, Content)
         {
             Position = position;
@@ -23,11 +24,12 @@ namespace Bacon_Game_Jam_5
             _target = target;
             countdown = 5;
             light = map.lightMap.GetLight();
+            _color = color;
             if (light != null)
             {
                 light.Radius = 10;
                 light.Position = Position;
-                light.Color = Color.White;
+                light.Color = color;
             }
         }
 
@@ -47,12 +49,17 @@ namespace Bacon_Game_Jam_5
             {
                 if ((_target.Position - Position).Length() < Map.TileSize)
                 {
+                    int damage = 0;
+                    if(_color==Color.White)
+                            damage = 5;
+                    if (_color == Color.Red)
+                        damage = 10;
                     Enemy e = _target as Enemy;
                     if (e != null)
-                        e.Health -= 5;
+                        e.Health -= damage;
                     Player p = _target as Player;
                     if (p != null)
-                        p.Health += 10;
+                        p.Health += damage;
                     Done();
                 }
                 float speed = _direction.Length();
@@ -69,7 +76,8 @@ namespace Bacon_Game_Jam_5
         public void Done()
         {
             _map.Objects.Remove(this);
-            light.Radius = 0;
+            if (light != null)
+                light.Radius = 0;
         }
     }
 }

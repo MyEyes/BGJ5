@@ -47,32 +47,20 @@ namespace Bacon_Game_Jam_5
 
             if (Health <= 0)
             {
-                _map.Objects.Remove(this);
-                light.Radius = 0;
-                for (int x = 0; x < 40; x++)
-                {
-                    Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
-                    dir.Normalize();
-                    dir *= 4.5f+(float)_rand.NextDouble();
-                    AntiLightParticle alp = new AntiLightParticle(Position, dir, null, _map, null);
-                    _map.Objects.Add(alp);
-                }
+                Die(p);
             }
 
             if (p != null)
             {
                 if ((p.Position - Position).Length() < light.Radius/2.0f + p.Health / 4.0f)
                 {
+                    p.Attack(this);
                     Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
-                    dir.Normalize();
-                    dir *= 5;
-                    LightParticle lp = new LightParticle(p.Position, dir, this, _map, null);
-                    _map.Objects.Add(lp);
-                    dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
                     dir.Normalize();
                     dir *= 5;
                     AntiLightParticle alp = new AntiLightParticle(Position, dir, p, _map, null);
                     _map.Objects.Add(alp);
+                    targetPos = p.Position;
                 }
             }
 
@@ -99,6 +87,34 @@ namespace Bacon_Game_Jam_5
         {
             targetPos = new Vector2((float)_rand.NextDouble() * Map.SizeX * Map.TileSize, (float)_rand.NextDouble() * Map.SizeY * Map.TileSize);
             countDown = 2*(targetPos - Position).Length() / 60.0f;
+        }
+
+        void Die(Player p)
+        {
+            _map.Objects.Remove(this);
+            light.Radius = 0;
+            for (int x = 0; x < 40; x++)
+            {
+                Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
+                dir.Normalize();
+                dir *= 4.5f + (float)_rand.NextDouble();
+                AntiLightParticle alp = new AntiLightParticle(Position, dir, null, _map, null);
+                _map.Objects.Add(alp);
+            }
+            for (int x = 0; x < 20; x++)
+            {
+                Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
+                dir.Normalize();
+                dir *= 1 + (float)_rand.NextDouble();
+                LightParticle alp = new LightParticle(Position, dir, null,Color.White, _map, null);
+                _map.Objects.Add(alp);
+            }
+            for (int x = 0; x < 5; x++)
+            {
+                LightParticle alp = new LightParticle(Position, Vector2.Zero, p, Color.White, _map, null);
+                _map.Objects.Add(alp);
+            }
+
         }
     }
 }
