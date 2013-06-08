@@ -3,3 +3,4 @@ Content\ShatterEffect.xnb
 Content\TileSet.xnb
 Content\noise.xnb
 Content\font.xnb
+Content\Bacon.xnb

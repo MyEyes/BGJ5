@@ -31,7 +31,7 @@ namespace Bacon_Game_Jam_5
             cam = new Camera(new Vector2(100, 100), GraphicsDevice.Viewport.Bounds);
             map = new Map(Content);
             map.lightMap = new Lightmap(GraphicsDevice, Content);
-            map.lightMap.AmbientColor = new Color(50, 50, 50);
+            map.lightMap.AmbientColor = new Color(30, 30, 30);
             
             player = new Player(new Vector2(64, 64), map, Content);
             map.Objects.Add(player);
@@ -44,6 +44,12 @@ namespace Bacon_Game_Jam_5
                 Enemy enemy = new Enemy(new Vector2(offset + (float)rand.NextDouble() * (Map.SizeX * Map.TileSize - 2 * offset), offset + (float)rand.NextDouble() * (Map.SizeY * Map.TileSize - offset * 2)), map, Content);
                 map.Objects.Add(enemy);
             }
+             /*
+            Enemy enemy = new Enemy(new Vector2(160, 160), map, Content);
+            enemy.Health = 200;
+            map.Objects.Add(enemy);
+            lastEnemy = enemy;
+              */
 
             for (int x = 0; x < 20; x++)
             {

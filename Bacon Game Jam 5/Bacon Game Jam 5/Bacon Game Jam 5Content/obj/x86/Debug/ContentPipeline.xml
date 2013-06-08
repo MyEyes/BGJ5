@@ -46,6 +46,15 @@
       <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\font.xnb</Output>
       <Time>2013-06-08T19:52:30.1524621+02:00</Time>
     </Item>
+    <Item>
+      <Source>Bacon.png</Source>
+      <Name>Bacon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Bacon.xnb</Output>
+      <Time>2013-06-08T21:54:11.3261581+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

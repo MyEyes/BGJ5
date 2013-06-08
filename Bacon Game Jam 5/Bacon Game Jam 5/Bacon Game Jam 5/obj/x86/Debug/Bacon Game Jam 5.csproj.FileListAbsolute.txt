@@ -9,3 +9,4 @@ C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Ja
 C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\noise.xnb
 C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\font.xnb
 C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\ShatterEffect.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Bacon.xnb

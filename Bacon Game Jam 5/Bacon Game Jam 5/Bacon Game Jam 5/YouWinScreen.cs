@@ -28,6 +28,8 @@ namespace Bacon_Game_Jam_5
 
         RasterizerState _wireFrame;
 
+        Texture2D BACON;
+
         public YouWinScreen(Texture2D oldScreen, Vector2 LastEnemyPosition)
         {
             origin = LastEnemyPosition;
@@ -99,6 +101,8 @@ namespace Bacon_Game_Jam_5
                 weight /= 5;
                 fallSpeed[x] = weight;
             }
+
+            BACON = Content.Load<Texture2D>("Bacon");
         }
 
         public void Draw(SpriteBatch batch)
@@ -106,6 +110,12 @@ namespace Bacon_Game_Jam_5
             _device.Clear(Color.White);
 
             batch.Begin();
+            batch.Draw(BACON, new Vector2(-120, -120), Color.White);
+            batch.Draw(BACON, new Vector2(-70, -70), Color.White);
+            batch.Draw(BACON, new Vector2(-20, -20), Color.White);
+            batch.Draw(BACON, new Vector2(30, 30), Color.White);
+            batch.Draw(BACON, new Vector2(80, 80), Color.White);
+            batch.Draw(BACON, new Vector2(130, 130), Color.White);
             batch.DrawString(_font, "You WIN!", new Vector2(100, 200), Color.Black);
             batch.DrawString(_font, "Press SPACE to play again!", new Vector2(100, 280), Color.Black);
             batch.End();
