@@ -5,3 +5,5 @@ C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Ja
 C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\obj\x86\Debug\Bacon Game Jam 5.exe
 C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\obj\x86\Debug\Bacon Game Jam 5.pdb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\TileSet.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\noise.xnb

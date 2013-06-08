@@ -36,10 +36,14 @@ namespace Bacon_Game_Jam_5
         {
             get
             {
-                
-                   Matrix projection = Matrix.CreateTranslation(-_screenSize.Width / 2 - 0.5f, -_screenSize.Height / 2 - 0.5f, 0) * Matrix.CreateScale(2 / ((float)_screenSize.Width), -2 / ((float)_screenSize.Height), 1);
+                Matrix projection = Matrix.CreateTranslation(-_screenSize.Width / 2 - 0.5f, -_screenSize.Height / 2 - 0.5f, 0) * Matrix.CreateScale(2 / ((float)_screenSize.Width), -2 / ((float)_screenSize.Height), 1);
                 return projection;
             }
+        }
+
+        public Rectangle ViewSpace
+        {
+            get { return new Rectangle((int)_position.X - _screenSize.Width / 2 - 1, (int)_position.Y - _screenSize.Height / 2 - 1, _screenSize.Width + 2, _screenSize.Height + 2); }
         }
     }
 }

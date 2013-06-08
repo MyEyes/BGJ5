@@ -20,7 +20,9 @@ namespace Bacon_Game_Jam_5
         SpriteBatch spriteBatch;
 
         Camera cam;
-        Lightmap lightMap;
+        Map map;
+        Player player;
+        
 
         public Game1()
         {
@@ -51,11 +53,17 @@ namespace Bacon_Game_Jam_5
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             cam = new Camera(new Vector2(100, 100), GraphicsDevice.Viewport.Bounds);
-            lightMap = new Lightmap(GraphicsDevice, Content);
-            Light testLight = lightMap.GetLight();
-            testLight.Radius = 100;
-            testLight.Position = new Vector2(100, 100);
-            testLight.Color = Color.White;
+            map = new Map(Content);
+            map.lightMap = new Lightmap(GraphicsDevice, Content);
+            map.lightMap.AmbientColor = new Color(50,50,50);
+            player = new Player(new Vector2(5,5), map, Content);
+            map.Objects.Add(player);
+            Random rand = new Random();
+            for (int x = 0; x < 30; x++)
+            {
+                Enemy enemy = new Enemy(new Vector2((float)rand.NextDouble() * Map.SizeX * Map.TileSize, (float)rand.NextDouble() * Map.SizeY * Map.TileSize), map, Content);
+                map.Objects.Add(enemy);
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -78,7 +86,19 @@ namespace Bacon_Game_Jam_5
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            KeyboardState keyboard = Keyboard.GetState();
+            map.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            if (keyboard.IsKeyDown(Keys.A))
+                player.Move(new Vector2(-1, 0));
+            if (keyboard.IsKeyDown(Keys.D))
+                player.Move(new Vector2(1, 0));
+            if (keyboard.IsKeyDown(Keys.W))
+                player.Move(new Vector2(0,-1));
+            if (keyboard.IsKeyDown(Keys.S))
+                player.Move(new Vector2(0, 1));
+
+            cam.SetPosition(player.Position);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -90,10 +110,14 @@ namespace Bacon_Game_Jam_5
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            lightMap.DrawLights(cam);
-            lightMap.DrawLightmap(spriteBatch);
+            map.lightMap.DrawLights(cam);
+
+            GraphicsDevice.Clear(Color.Black);
+
+            map.Draw(cam, spriteBatch);
+            map.lightMap.DrawLightmap(spriteBatch);
             
             // TODO: Add your drawing code here
 
