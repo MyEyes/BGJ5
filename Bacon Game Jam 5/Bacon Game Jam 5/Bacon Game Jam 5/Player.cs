@@ -11,20 +11,22 @@ namespace Bacon_Game_Jam_5
     class Player : GameObject
     {
         Light light;
-        float Health = 1000;
+        public float Health = 1000;
+        public const float MaxHealth = 1000;//Not going to be strictly enforced
 
         public Player(Vector2 pos, Map map, ContentManager Content):base(map,Content)
         {
             light = map.lightMap.GetLight();
             light.Radius = Health / 2.0f;
             light.Color = Color.White;
-            Size = new Vector2(5, 5);
+            light.Shadows = true;
+            Size = new Vector2(8, 8);
             Position = pos;
         }
 
         public override void Update(float seconds)
         {
-            light.Position = Position;
+            light.Position = Position-Size/2;
             light.Radius = Health / 2.0f;
 
             Health -= seconds;

@@ -14,6 +14,7 @@ namespace Bacon_Game_Jam_5
         public Vector2 Position;
         public float Radius;
         public Color Color;
+        public bool Shadows=false;
 
         public void UpdateBuffer(int offset, VertexBuffer buffer)
         {
@@ -28,7 +29,7 @@ namespace Bacon_Game_Jam_5
 
     public class Lightmap
     {
-        const int MaxLights = 60;
+        const int MaxLights = 1024;
         Light[] _lights = new Light[MaxLights];
 
         Light[] _antiLights = new Light[MaxLights];
@@ -42,14 +43,33 @@ namespace Bacon_Game_Jam_5
 
         BlendState _multiplicative;
         BlendState _subtractive;
+        BlendState _noDraw;
+
+        DepthStencilState _generateStencil;
+        DepthStencilState _stencilCutout;
 
         VertexBuffer _VBuffer;
         IndexBuffer _IBuffer;
 
+        VertexBuffer shadowVB;
+        IndexBuffer shadowIB;
+
         public Color AmbientColor;
+
+        public static Matrix rotateRight;
+        public static Matrix rotateLeft;
+
+        const int maxX = 30;
+        const int maxY = 30;
 
         public Lightmap(GraphicsDevice device, ContentManager Content)
         {
+            rotateLeft = Matrix.CreateRotationZ(0 * MathHelper.Pi / 180);
+            rotateRight = Matrix.CreateRotationZ(0 * MathHelper.Pi / 180);
+            
+
+
+
             _device = device;
             LightEffect = Content.Load<Effect>("LightEffect");
             _noiseTexture = Content.Load<Texture2D>("noise");
@@ -80,16 +100,71 @@ namespace Bacon_Game_Jam_5
             _subtractive.ColorBlendFunction = BlendFunction.ReverseSubtract;
             _subtractive.ColorDestinationBlend = Blend.One;
             _subtractive.ColorSourceBlend = Blend.One;
+
+            shadowIB = new IndexBuffer(device, IndexElementSize.SixteenBits, 4 * 3 * 3 * maxX * maxY, BufferUsage.WriteOnly);
+            indices = new short[4 * 3 * 3 * maxX * maxY];
+            for (int x = 0; x < 4 * 3 * 3 * maxX * maxY; x += 12)
+            {
+                short offset = (short)(6 * x / 12);
+                indices[x] = (short)(offset);
+                indices[x + 1] = (short)(offset + 1);
+                indices[x + 2] = (short)(offset + 4);
+
+                indices[x + 3] = (short)(offset + 1);
+                indices[x + 4] = (short)(offset + 2);
+                indices[x + 5] = (short)(offset + 4);
+
+                indices[x + 6] = (short)(offset + 2);
+                indices[x + 7] = (short)(offset + 5);
+                indices[x + 8] = (short)(offset + 4);
+
+                indices[x + 9] = (short)(offset + 2);
+                indices[x + 10] = (short)(offset + 3);
+                indices[x + 11] = (short)(offset + 5);
+            }
+            shadowIB.SetData<short>(indices);
+            shadowVB = new VertexBuffer(device, VertexPositionColor.VertexDeclaration, 6 * 3 * maxX * maxY, BufferUsage.None);
+
+            _generateStencil = new DepthStencilState();
+            _generateStencil.DepthBufferWriteEnable = false;
+            _generateStencil.StencilPass = StencilOperation.Increment;
+            _generateStencil.ReferenceStencil = 1;
+            _generateStencil.StencilEnable = true;
+            _generateStencil.StencilFunction = CompareFunction.Always;
+
+            _stencilCutout = new DepthStencilState();
+            _stencilCutout.DepthBufferEnable = false;
+            _stencilCutout.StencilEnable = true;
+            _stencilCutout.StencilFunction = CompareFunction.Equal;
+            _stencilCutout.ReferenceStencil = 0;
+
+            _noDraw = new BlendState();
+            _noDraw.ColorSourceBlend = Blend.Zero;
+            _noDraw.ColorWriteChannels = ColorWriteChannels.None;
         }
 
-        public void DrawLights(Camera cam)
+        public void DrawLights(Camera cam,SpriteBatch batch, Map map)
         {
 
-            time += 0.0001f;
+            _device.SetRenderTarget(_lightMap);
+
+            _device.Clear(AmbientColor);
+            time += 0.001f;
+
+            map.Draw(cam, batch, _noDraw);
+            DrawShadowedLights(cam, map);
+            DrawNormalLights(cam);
+            _device.SetRenderTarget(null);
+        }
+
+        public void DrawNormalLights(Camera cam)
+        {
+
+            _device.SetVertexBuffer(null);
             int offset = 0;
             for (int x = 0; x < MaxLights; x++)
             {
-                if (_lights[x] != null && _lights[x].Radius>0)
+                if (_lights[x] != null && _lights[x].Radius > 0 && !_lights[x].Shadows)
                 {
                     _lights[x].UpdateBuffer(offset, _VBuffer);
                     offset += 4;
@@ -98,19 +173,14 @@ namespace Bacon_Game_Jam_5
             int antiOffset = offset;
             for (int x = 0; x < MaxLights; x++)
             {
-                if (_antiLights[x] != null && _antiLights[x].Radius > 0)
+                if (_antiLights[x] != null && _antiLights[x].Radius > 0 && !_antiLights[x].Shadows)
                 {
                     _antiLights[x].UpdateBuffer(antiOffset, _VBuffer);
                     antiOffset += 4;
                 }
             }
 
-            VertexPositionColorTexture[] test = new VertexPositionColorTexture[2 * 4 * MaxLights];
-            _VBuffer.GetData<VertexPositionColorTexture>(test);
 
-            _device.SetRenderTarget(_lightMap);
-
-            _device.Clear(AmbientColor);
             _device.DepthStencilState = DepthStencilState.None;
             _device.BlendState = BlendState.Additive;
             _device.RasterizerState = RasterizerState.CullNone;
@@ -120,19 +190,77 @@ namespace Bacon_Game_Jam_5
             LightEffect.Parameters["Projection"].SetValue(cam.ProjectionMatrix);
             LightEffect.Parameters["time"].SetValue(-time);
 
+            LightEffect.CurrentTechnique = LightEffect.Techniques["DrawLight"];
+
             _device.SetVertexBuffer(_VBuffer);
             _device.Indices = _IBuffer;
             LightEffect.CurrentTechnique.Passes[0].Apply();
             if (offset > 0)
-                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, offset, 0, offset/2);
+                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, offset, 0, offset / 2);
 
             _device.BlendState = _subtractive;
             LightEffect.Parameters["time"].SetValue(time);
             LightEffect.CurrentTechnique.Passes[0].Apply();
             if (antiOffset - offset > 0)
-                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, antiOffset - offset, 3*offset/2, (antiOffset - offset) / 2);
+                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, antiOffset - offset, 3 * offset / 2, (antiOffset - offset) / 2);
+        }
 
-            _device.SetRenderTarget(null);
+        public void DrawShadowedLights(Camera cam, Map map)
+        {
+
+            _device.DepthStencilState = DepthStencilState.None;
+            _device.RasterizerState = RasterizerState.CullNone;
+
+            LightEffect.Parameters["World"].SetValue(Matrix.Identity);
+            LightEffect.Parameters["View"].SetValue(cam.ViewMatrix);
+            LightEffect.Parameters["Projection"].SetValue(cam.ProjectionMatrix);
+            LightEffect.Parameters["time"].SetValue(-time);
+
+            for (int x = 0; x < MaxLights; x++)
+            {
+                if (_lights[x] != null && _lights[x].Radius > 0 && _lights[x].Shadows)
+                {
+                    _device.Clear(ClearOptions.Stencil, Color.White, 0, 0);
+
+                    _device.DepthStencilState = _generateStencil;
+                    _device.BlendState = _noDraw;
+                    LightEffect.CurrentTechnique = LightEffect.Techniques["Shadow"];
+                    int vertices = map.CreateShadowGeometry(_lights[x].Position, new Rectangle((int)(_lights[x].Position.X - _lights[x].Radius), (int)(_lights[x].Position.Y - _lights[x].Radius), (int)(2 * _lights[x].Radius), (int)(2 * _lights[x].Radius)), shadowVB);
+
+                    
+                    VertexPositionColor[] test = new VertexPositionColor[shadowVB.VertexCount];
+                    shadowVB.GetData<VertexPositionColor>(test);
+                     
+                    test = new VertexPositionColor[]
+                    {
+                        new VertexPositionColor(new Vector3(44,323,0),Color.White),
+                        new VertexPositionColor(new Vector3(32,224,0),Color.White),
+                        new VertexPositionColor(new Vector3(32,256,0),Color.White),
+                        new VertexPositionColor(new Vector3(42,355,0),Color.White),
+                        new VertexPositionColor(new Vector3(32,224,0),Color.White),
+                        new VertexPositionColor(new Vector3(32,256,0),Color.White),
+                    };
+                    shadowVB.SetData<VertexPositionColor>(test, 0, 6);
+
+
+                    _device.SetVertexBuffer(shadowVB);
+                    _device.Indices = shadowIB;
+                    LightEffect.CurrentTechnique.Passes[0].Apply();
+                    if (vertices > 0)
+                        _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertices, 0, 4 * vertices / 6);
+
+                    _lights[x].UpdateBuffer(0, _VBuffer);
+                    _device.DepthStencilState = _stencilCutout;
+                    _device.BlendState = BlendState.Additive;
+                    _device.SetVertexBuffer(_VBuffer);
+                    _device.Indices = _IBuffer;
+                    LightEffect.CurrentTechnique = LightEffect.Techniques["DrawLight"];
+                    LightEffect.CurrentTechnique.Passes[0].Apply();
+                    _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 4, 0, 2);
+                    
+                }
+            }
+
         }
 
         public void DrawLightmap(SpriteBatch batch)

@@ -35,6 +35,17 @@ struct VertexShaderOutput
     // interpoliert und als Eingabe für Ihren Pixel-Shader geliefert.
 };
 
+struct ShadowVSInput
+{
+	float4 Position: POSITION0;
+	float4 Color : COLOR0;
+};
+
+struct ShadowVSOutput
+{
+	float4 Position: POSITION0;
+};
+
 VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 {
     VertexShaderOutput output;
@@ -64,6 +75,22 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     return input.Color*(1-dist)*noise;
 }
 
+ShadowVSOutput ShadowVS(ShadowVSInput input)
+{
+	ShadowVSOutput output;
+	input.Position.w=1;
+    float4 worldPosition = mul(input.Position, World);
+    float4 viewPosition = mul(worldPosition, View);
+    output.Position = mul(viewPosition, Projection);
+	output.Position.w=1;
+	return output;
+}
+
+float4 ShadowPS(ShadowVSOutput input):COLOR0
+{
+	return float4(1,1,1,1);
+}
+
 technique DrawLight
 {
     pass Pass1
@@ -72,5 +99,16 @@ technique DrawLight
 
         VertexShader = compile vs_2_0 VertexShaderFunction();
         PixelShader = compile ps_2_0 PixelShaderFunction();
+    }
+}
+
+technique Shadow
+{
+    pass Pass1
+    {
+        // TODO: Stellen Sie Renderstates hier ein.
+
+        VertexShader = compile vs_2_0 ShadowVS();
+        PixelShader = compile ps_2_0 ShadowPS();
     }
 }

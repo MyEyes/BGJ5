@@ -64,6 +64,12 @@ namespace Bacon_Game_Jam_5
                 Enemy enemy = new Enemy(new Vector2((float)rand.NextDouble() * Map.SizeX * Map.TileSize, (float)rand.NextDouble() * Map.SizeY * Map.TileSize), map, Content);
                 map.Objects.Add(enemy);
             }
+
+            for (int x = 0; x < 20; x++)
+            {
+                LightRefill refill = new LightRefill(new Vector2((float)rand.NextDouble() * Map.SizeX * Map.TileSize, (float)rand.NextDouble() * Map.SizeY * Map.TileSize), map, Content);
+                map.Objects.Add(refill);
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -110,13 +116,11 @@ namespace Bacon_Game_Jam_5
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            map.lightMap.DrawLights(cam);
+            map.lightMap.DrawLights(cam,spriteBatch, map);
 
             GraphicsDevice.Clear(Color.Black);
 
-            map.Draw(cam, spriteBatch);
+            map.Draw(cam, spriteBatch, BlendState.Opaque);
             map.lightMap.DrawLightmap(spriteBatch);
             
             // TODO: Add your drawing code here

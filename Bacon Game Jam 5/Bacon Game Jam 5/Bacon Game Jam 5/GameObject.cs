@@ -8,12 +8,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Bacon_Game_Jam_5
 {
-    class GameObject
+    public class GameObject
     {
         public Vector2 Position;
         public Vector2 Size;
 
         protected Map _map;
+
+        protected static Random _rand = new Random();
 
         public GameObject(Map map, ContentManager Content)
         {
