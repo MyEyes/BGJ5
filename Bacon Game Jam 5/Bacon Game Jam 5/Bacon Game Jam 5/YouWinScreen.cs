@@ -34,6 +34,9 @@ namespace Bacon_Game_Jam_5
 
         Texture2D BACON;
 
+        Map _dummyMap;
+        Camera _dummyCam;
+
         public YouWinScreen(Texture2D oldScreen, Vector2 LastEnemyPosition)
         {
             origin = LastEnemyPosition;
@@ -97,11 +100,12 @@ namespace Bacon_Game_Jam_5
             _vertices = vertices.ToArray();
             fallSpeed = new float[_vertices.Length];
             float diag = new Vector2(_device.Viewport.Width, _device.Viewport.Height).Length();
+            
             for (int x = 0; x < _vertices.Length; x++)
             {
 
                 float weight = 1/(1 + (_vertices[x].Position - new Vector3(origin, 0)).Length());
-                weight *= 0.8f + 0.2f * (float)rand.NextDouble();
+                weight *= 0.7f + 0.1f * (float)rand.NextDouble();
                 weight /= 5;
                 fallSpeed[x] = weight;
             }
@@ -114,24 +118,30 @@ namespace Bacon_Game_Jam_5
             _fanfare = Sounds.GetSoundEffectInstance("fanfare");
             _fanfare.Play();
             _clap.Play();
+
+            _dummyCam = new Camera(new Vector2(512, 512), _device.Viewport.Bounds);
+            _dummyMap = new Map(Content);
+            _dummyMap.lightMap = new Lightmap(_device, Content);
+            _dummyMap.lightMap.AmbientColor = new Color(160, 160, 160);
+            for (int x = 0; x < 8; x++)
+                _dummyMap.Objects.Add(new RandomLightWalker(_dummyCam.Position + new Vector2((float)rand.NextDouble() * device.Viewport.Width - device.Viewport.Width / 2, (float)rand.NextDouble() * device.Viewport.Height - device.Viewport.Height / 2), _dummyMap, Content));
         }
 
         public void Draw(SpriteBatch batch)
         {
-            _device.Clear(Color.White);
+            _dummyMap.lightMap.DrawLights(_dummyCam, batch, _dummyMap);
+            _device.Clear(Color.Black);
+            _dummyMap.Draw(_dummyCam, batch, BlendState.AlphaBlend);
+            _dummyMap.lightMap.DrawLightmap(batch);
 
             batch.Begin();
-            batch.Draw(BACON, new Vector2(-120, -120), Color.White);
-            batch.Draw(BACON, new Vector2(-70, -70), Color.White);
-            batch.Draw(BACON, new Vector2(-20, -20), Color.White);
-            batch.Draw(BACON, new Vector2(30, 30), Color.White);
-            batch.Draw(BACON, new Vector2(80, 80), Color.White);
-            batch.Draw(BACON, new Vector2(130, 130), Color.White);
+            batch.DrawString(_font, "You did it, the lights are out. Free once more", new Vector2(100, 20), Color.Black);
             batch.DrawString(_font, "You Win!", new Vector2(100, 200), Color.Black);
             batch.DrawString(_font, "Press Space to play again!", new Vector2(100, 280), Color.Black);
             batch.End();
 
             _device.RasterizerState = RasterizerState.CullNone;
+            //_device.RasterizerState = _wireFrame;
             _effect.CurrentTechnique.Passes[0].Apply();
             _device.DrawUserPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, _vertices, 0, _vertices.Length / 3);
         }
@@ -143,6 +153,8 @@ namespace Bacon_Game_Jam_5
             {
                 _vertices[x].Position += this.fallSpeed[x] * Vector3.Forward;
             }
+
+            _dummyMap.Update(seconds);
 
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Space))

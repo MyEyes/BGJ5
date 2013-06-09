@@ -36,6 +36,11 @@ namespace Bacon_Game_Jam_5
             background.Play();
         }
 
+        public static void PitchBackground(float pitch)
+        {
+            background.Pitch = pitch;
+        }
+
         public static SoundEffectInstance GetSoundEffectInstance(string name)
         {
             if (_sounds.ContainsKey(name))

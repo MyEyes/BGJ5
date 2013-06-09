@@ -32,6 +32,8 @@ namespace Bacon_Game_Jam_5
         float phaseCountdown = 10;
         float PhaseTime = 10;
         Vector2 offset = new Vector2(2000, 2000);
+        float pitch = 0;
+        KeyboardState _lastKeyboard;
 
         public void Initialize(GraphicsDevice device, ContentManager Content)
         {
@@ -58,7 +60,7 @@ namespace Bacon_Game_Jam_5
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Space))
             {
-                if (phaseCountdown <= 0)
+                if (phaseCountdown <= 0 && !_lastKeyboard.IsKeyDown(Keys.Space))
                     NextPhase();
                 else
                     seconds *= 3;
@@ -85,8 +87,13 @@ namespace Bacon_Game_Jam_5
                 enemy.Health = 10000;
                 enemy.targetPos = new Vector2(500, 500)+offset;
                 enemy.countDown = 1000;
-                if(phaseCountdown<5)
-                    _dummyMap.lightMap.AmbientColor=Color.Lerp(new Color(30, 30, 30),new Color(200, 200, 200), phaseCountdown/5.0f);
+                if (phaseCountdown < 5)
+                {
+                    _dummyMap.lightMap.AmbientColor = Color.Lerp(new Color(30, 30, 30), new Color(200, 200, 200), phaseCountdown / 5.0f);
+                    pitch = -(5-phaseCountdown) / 5.0f;
+                    pitch = pitch >= -1 ? pitch : -1;
+                    Sounds.PitchBackground(pitch);
+                }
             }
             else if (phase == 2)
             {
@@ -95,7 +102,7 @@ namespace Bacon_Game_Jam_5
             }
 
             _dummyMap.Update(seconds);
-
+            _lastKeyboard = state;
         }
 
         public void NextPhase()

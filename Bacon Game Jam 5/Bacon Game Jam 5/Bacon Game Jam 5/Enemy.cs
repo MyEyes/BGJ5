@@ -133,11 +133,10 @@ namespace Bacon_Game_Jam_5
                 LightParticle alp = new LightParticle(Position, dir, null,Color.White, _map, null);
                 _map.Objects.Add(alp);
             }
-            for (int x = 0; x < 5; x++)
-            {
-                LightParticle alp = new LightParticle(Position, Vector2.Zero, p, Color.White, _map, null);
-                _map.Objects.Add(alp);
-            }
+
+            LightRefill refill = new LightRefill(Position, _map, null);
+            refill.RefillLeft = 150;
+            _map.Objects.Add(refill);
 
         }
 

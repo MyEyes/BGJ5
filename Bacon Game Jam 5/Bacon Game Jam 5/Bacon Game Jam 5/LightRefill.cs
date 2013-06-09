@@ -11,7 +11,7 @@ namespace Bacon_Game_Jam_5
     class LightRefill:GameObject
     {
 
-        float RefillLeft = 0;
+        public float RefillLeft = 0;
         float coolDown = 0;
         const float coolDownTime = 0.3f;
 
