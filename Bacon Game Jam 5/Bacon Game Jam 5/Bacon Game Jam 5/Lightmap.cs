@@ -95,11 +95,16 @@ namespace Bacon_Game_Jam_5
             _multiplicative = new BlendState();
             _multiplicative.ColorSourceBlend = Blend.DestinationColor;
             _multiplicative.ColorDestinationBlend = Blend.Zero;
+            _multiplicative.AlphaSourceBlend = Blend.DestinationColor;
+            _multiplicative.AlphaDestinationBlend = Blend.Zero;
 
             _subtractive = new BlendState();
             _subtractive.ColorBlendFunction = BlendFunction.ReverseSubtract;
+            _subtractive.AlphaBlendFunction = BlendFunction.ReverseSubtract;
             _subtractive.ColorDestinationBlend = Blend.One;
+            _subtractive.AlphaDestinationBlend = Blend.One;
             _subtractive.ColorSourceBlend = Blend.One;
+            _subtractive.AlphaSourceBlend = Blend.One;
 
             shadowIB = new IndexBuffer(device, IndexElementSize.SixteenBits, 4 * 3 * 3 * maxX * maxY, BufferUsage.WriteOnly);
             indices = new short[4 * 3 * 3 * maxX * maxY];
@@ -141,6 +146,7 @@ namespace Bacon_Game_Jam_5
             _noDraw = new BlendState();
             _noDraw.ColorSourceBlend = Blend.Zero;
             _noDraw.ColorWriteChannels = ColorWriteChannels.None;
+            _noDraw.AlphaSourceBlend = Blend.Zero;
         }
 
         public void DrawLights(Camera cam,SpriteBatch batch, Map map)

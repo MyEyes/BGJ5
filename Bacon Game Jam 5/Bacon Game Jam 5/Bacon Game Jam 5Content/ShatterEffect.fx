@@ -7,8 +7,6 @@ sampler TextureSampler
 = sampler_state 
 {
     Texture = <Texture>;
-	AddressU=Wrap;
-	AddressV=Wrap;
 };
 
 // TODO: Fügen Sie Effektparameter hier hinzu.

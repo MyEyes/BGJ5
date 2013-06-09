@@ -37,7 +37,6 @@ namespace Bacon_Game_Jam_5
             Size = new Vector2(24, 24);
             _eyeOffset = -Size / 2 + new Vector2(1, 4);
             Position = pos;
-            _eyes = Content.Load<Texture2D>("Eyes");
 
             _heartbeat = Sounds.GetSoundEffectInstance("Heartbeat");
             _heartbeat.IsLooped = true;

@@ -26,6 +26,8 @@ namespace Bacon_Game_Jam_5
         float targetPitch;
         float pitch;
 
+        KeyboardState _lastKeyboard;
+
         public void Initialize(GraphicsDevice GraphicsDevice, ContentManager Content)
         {
             this.GraphicsDevice = GraphicsDevice;
@@ -40,23 +42,27 @@ namespace Bacon_Game_Jam_5
             map.Objects.Add(player);
 
             Random rand = new Random();
+
+            targetPitch = -1;
+            pitch = -1;
             
             
             //Comment this out an uncomment the bit below to test the Win Screen
-            
+            /*
             for (int x = 0; x < 15; x++)
             {
                 int offset = 30*Map.TileSize;
                 Enemy enemy = new Enemy(new Vector2(offset + (float)rand.NextDouble() * (Map.SizeX * Map.TileSize - offset), offset + (float)rand.NextDouble() * (Map.SizeY * Map.TileSize - offset)), map, Content);
                 map.Objects.Add(enemy);
             }
+             */
              
-            /*
+            
             Enemy enemy = new Enemy(new Vector2(160, 160), map, Content);
             enemy.Health = 200;
             map.Objects.Add(enemy);
             lastEnemy = enemy;
-             */
+             
               
 
             for (int x = 0; x < 8; x++)
@@ -70,6 +76,7 @@ namespace Bacon_Game_Jam_5
                 RageTrigger rt = new RageTrigger(new Vector2((float)rand.NextDouble() * Map.SizeX * Map.TileSize, (float)rand.NextDouble() * Map.SizeY * Map.TileSize), map, Content);
                 map.Objects.Add(rt);
             }
+            _lastKeyboard = Keyboard.GetState();
         }
 
         public void Update(float seconds)
@@ -84,6 +91,12 @@ namespace Bacon_Game_Jam_5
                 player.Move(new Vector2(0, -2.5f));
             if (keyboard.IsKeyDown(Keys.S))
                 player.Move(new Vector2(0, 2.5f));
+
+            if (keyboard.IsKeyDown(Keys.Escape) && !_lastKeyboard.IsKeyDown(Keys.Escape))
+            {
+                Manager.Remove(this);
+                Manager.Add(new GameScreen());
+            }
 
 
             if (targetPitch < pitch)
@@ -149,6 +162,7 @@ namespace Bacon_Game_Jam_5
 
 
             cam.SetPosition(player.Position);
+            _lastKeyboard = keyboard;
 
         }
 

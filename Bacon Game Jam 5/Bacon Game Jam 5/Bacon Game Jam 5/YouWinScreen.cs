@@ -33,6 +33,9 @@ namespace Bacon_Game_Jam_5
         SoundEffectInstance _fanfare;
 
         Texture2D BACON;
+        int baconCounter = 0;
+        bool bacon = false;
+        KeyboardState _lastKeyboard;
 
         Map _dummyMap;
         Camera _dummyCam;
@@ -110,8 +113,6 @@ namespace Bacon_Game_Jam_5
                 fallSpeed[x] = weight;
             }
 
-            BACON = Content.Load<Texture2D>("Bacon");
-
             _clap = Sounds.GetSoundEffectInstance("Well_Done");
             _clap.IsLooped = true;
             _clap.Volume = 1;
@@ -119,12 +120,15 @@ namespace Bacon_Game_Jam_5
             _fanfare.Play();
             _clap.Play();
 
+            BACON = Content.Load<Texture2D>("Bacon");
+
             _dummyCam = new Camera(new Vector2(512, 512), _device.Viewport.Bounds);
             _dummyMap = new Map(Content);
             _dummyMap.lightMap = new Lightmap(_device, Content);
             _dummyMap.lightMap.AmbientColor = new Color(160, 160, 160);
             for (int x = 0; x < 8; x++)
                 _dummyMap.Objects.Add(new RandomLightWalker(_dummyCam.Position + new Vector2((float)rand.NextDouble() * device.Viewport.Width - device.Viewport.Width / 2, (float)rand.NextDouble() * device.Viewport.Height - device.Viewport.Height / 2), _dummyMap, Content));
+            _lastKeyboard = Keyboard.GetState();
         }
 
         public void Draw(SpriteBatch batch)
@@ -135,6 +139,15 @@ namespace Bacon_Game_Jam_5
             _dummyMap.lightMap.DrawLightmap(batch);
 
             batch.Begin();
+            if (bacon)
+            {
+                batch.Draw(BACON, new Vector2(-120, -120), Color.White);
+                batch.Draw(BACON, new Vector2(-70, -70), Color.White);
+                batch.Draw(BACON, new Vector2(-20, -20), Color.White);
+                batch.Draw(BACON, new Vector2(30, 30), Color.White);
+                batch.Draw(BACON, new Vector2(80, 80), Color.White);
+                batch.Draw(BACON, new Vector2(130, 130), Color.White);
+            }
             batch.DrawString(_font, "You did it, the lights are out. Free once more", new Vector2(100, 20), Color.Black);
             batch.DrawString(_font, "You Win!", new Vector2(100, 200), Color.Black);
             batch.DrawString(_font, "Press Space to play again!", new Vector2(100, 280), Color.Black);
@@ -164,6 +177,22 @@ namespace Bacon_Game_Jam_5
                 _fanfare.Stop();
                 _clap.Stop();
             }
+            if (baconCounter == 0 && keyboard.IsKeyDown(Keys.B))
+                baconCounter++;
+            if (baconCounter == 1 && keyboard.IsKeyDown(Keys.A))
+                baconCounter++;
+            if (baconCounter == 2 && keyboard.IsKeyDown(Keys.C))
+                baconCounter++;
+            if (baconCounter == 3 && keyboard.IsKeyDown(Keys.O))
+                baconCounter++;
+            if (baconCounter == 4 && keyboard.IsKeyDown(Keys.N))
+                baconCounter++;
+            if (baconCounter == 5)
+            {
+                baconCounter = 0;
+                bacon = !bacon;
+            }
+            _lastKeyboard = keyboard;
         }
     }
 }

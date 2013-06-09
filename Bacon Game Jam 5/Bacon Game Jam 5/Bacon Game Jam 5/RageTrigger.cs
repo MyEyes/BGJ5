@@ -28,7 +28,8 @@ namespace Bacon_Game_Jam_5
         {
             Player p = _map.Objects[0] as Player;
 
-            if ((p.Position - Position).Length() < 150)
+
+            if (p!=null && (p.Position - Position).Length() < 150)
             {
                 Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
                 dir.Normalize();

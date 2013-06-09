@@ -42,7 +42,6 @@ namespace Bacon_Game_Jam_5
             Position = pos;
             mode = EnemyMode.RandomWalk;
             _eyeOffset = -Size / 2 + new Vector2(1, 0);
-            _eyes = Content.Load<Texture2D>("Eyes");
             NewTargetPos();
         }
 
