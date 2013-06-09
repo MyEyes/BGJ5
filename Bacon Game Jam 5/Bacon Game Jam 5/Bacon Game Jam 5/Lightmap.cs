@@ -208,7 +208,7 @@ namespace Bacon_Game_Jam_5
             LightEffect.Parameters["time"].SetValue(time);
             LightEffect.CurrentTechnique.Passes[0].Apply();
             if (antiOffset - offset > 0)
-                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, antiOffset - offset, 3 * offset / 2, (antiOffset - offset) / 2);
+                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, antiOffset, 6 * offset / 4, (antiOffset - offset) / 2);
         }
 
         public void DrawShadowedLights(Camera cam, Map map)

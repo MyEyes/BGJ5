@@ -1,5 +1,11 @@
 Full source at https://github.com/MyEyes/BGJ5/
 
+**************Requirements***************
+This game requires the XNA 4.0 refresh redist to run
+as well as .Net 4.0.
+
+XNA redist: http://www.microsoft.com/en-us/download/details.aspx?id=20914
+
 ****************Controls*****************
 Move					- W A S D
 Skip Intro				- ESC
