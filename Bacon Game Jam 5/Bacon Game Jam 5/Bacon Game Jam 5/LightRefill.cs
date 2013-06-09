@@ -21,7 +21,7 @@ namespace Bacon_Game_Jam_5
             : base(map, Content)
         {
             this.Position = Position;
-            RefillLeft = 500;
+            RefillLeft = 300;
             light = _map.lightMap.GetLight();
             if (light != null)
             {

@@ -48,20 +48,21 @@ namespace Bacon_Game_Jam_5
             
             
             //Comment this out an uncomment the bit below to test the Win Screen
-            /*
+            
             for (int x = 0; x < 15; x++)
             {
                 int offset = 30*Map.TileSize;
                 Enemy enemy = new Enemy(new Vector2(offset + (float)rand.NextDouble() * (Map.SizeX * Map.TileSize - offset), offset + (float)rand.NextDouble() * (Map.SizeY * Map.TileSize - offset)), map, Content);
                 map.Objects.Add(enemy);
             }
-             */
              
-            
+             
+            /*
             Enemy enemy = new Enemy(new Vector2(160, 160), map, Content);
             enemy.Health = 200;
             map.Objects.Add(enemy);
             lastEnemy = enemy;
+             */
              
               
 
