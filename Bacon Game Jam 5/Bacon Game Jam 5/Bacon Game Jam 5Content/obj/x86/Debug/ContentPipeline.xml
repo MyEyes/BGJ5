@@ -44,7 +44,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\font.xnb</Output>
-      <Time>2013-06-08T19:52:30.1524621+02:00</Time>
+      <Time>2013-06-09T02:15:53.6530564+02:00</Time>
     </Item>
     <Item>
       <Source>Bacon.png</Source>
@@ -54,6 +54,114 @@
       <Options>None</Options>
       <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Bacon.xnb</Output>
       <Time>2013-06-08T21:54:11.3261581+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Eyes.png</Source>
+      <Name>Eyes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Eyes.xnb</Output>
+      <Time>2013-06-09T00:48:57.2066043+02:00</Time>
+    </Item>
+    <Item>
+      <Source>DarkFont.spritefont</Source>
+      <Name>DarkFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\DarkFont.xnb</Output>
+      <Time>2013-06-09T02:05:38.1008408+02:00</Time>
+    </Item>
+    <Item>
+      <Source>DeathFlash.wav</Source>
+      <Name>DeathFlash</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\DeathFlash.xnb</Output>
+      <Time>2013-06-09T02:59:50.0368898+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Ambience.wav</Source>
+      <Name>Ambience</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Ambience.xnb</Output>
+      <Time>2013-06-09T02:59:50.0348897+02:00</Time>
+    </Item>
+    <Item>
+      <Source>eviljest.wav</Source>
+      <Name>eviljest</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\eviljest.xnb</Output>
+      <Time>2013-06-09T03:13:23.3944127+02:00</Time>
+    </Item>
+    <Item>
+      <Source>beep.wav</Source>
+      <Name>beep</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\beep.xnb</Output>
+      <Time>2013-06-09T03:44:47.4411949+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Heartbeat.wav</Source>
+      <Name>Heartbeat</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Heartbeat.xnb</Output>
+      <Time>2013-06-09T04:37:09.9914682+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hit1.wav</Source>
+      <Name>hit1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\hit1.xnb</Output>
+      <Time>2013-06-09T04:34:18.3216478+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hit2.wav</Source>
+      <Name>hit2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\hit2.xnb</Output>
+      <Time>2013-06-09T04:34:31.2743886+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Well_Done.wav</Source>
+      <Name>Well_Done</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Well_Done.xnb</Output>
+      <Time>2013-06-09T04:37:08.1303618+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Berserk.wav</Source>
+      <Name>Berserk</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\Berserk.xnb</Output>
+      <Time>2013-06-09T04:42:43.7355587+02:00</Time>
+    </Item>
+    <Item>
+      <Source>fanfare.wav</Source>
+      <Name>fanfare</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5\bin\x86\Debug\Content\fanfare.xnb</Output>
+      <Time>2013-06-09T05:00:14.4306602+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

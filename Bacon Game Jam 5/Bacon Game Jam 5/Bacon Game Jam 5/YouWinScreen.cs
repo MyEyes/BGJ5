@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
@@ -27,6 +28,9 @@ namespace Bacon_Game_Jam_5
         public ScreenManager Manager { get; set; }
 
         RasterizerState _wireFrame;
+
+        SoundEffectInstance _clap;
+        SoundEffectInstance _fanfare;
 
         Texture2D BACON;
 
@@ -103,6 +107,13 @@ namespace Bacon_Game_Jam_5
             }
 
             BACON = Content.Load<Texture2D>("Bacon");
+
+            _clap = Sounds.GetSoundEffectInstance("Well_Done");
+            _clap.IsLooped = true;
+            _clap.Volume = 1;
+            _fanfare = Sounds.GetSoundEffectInstance("fanfare");
+            _fanfare.Play();
+            _clap.Play();
         }
 
         public void Draw(SpriteBatch batch)
@@ -116,8 +127,8 @@ namespace Bacon_Game_Jam_5
             batch.Draw(BACON, new Vector2(30, 30), Color.White);
             batch.Draw(BACON, new Vector2(80, 80), Color.White);
             batch.Draw(BACON, new Vector2(130, 130), Color.White);
-            batch.DrawString(_font, "You WIN!", new Vector2(100, 200), Color.Black);
-            batch.DrawString(_font, "Press SPACE to play again!", new Vector2(100, 280), Color.Black);
+            batch.DrawString(_font, "You Win!", new Vector2(100, 200), Color.Black);
+            batch.DrawString(_font, "Press Space to play again!", new Vector2(100, 280), Color.Black);
             batch.End();
 
             _device.RasterizerState = RasterizerState.CullNone;
@@ -138,6 +149,8 @@ namespace Bacon_Game_Jam_5
             {
                 Manager.Remove(this);
                 Manager.Add(new GameScreen());
+                _fanfare.Stop();
+                _clap.Stop();
             }
         }
     }

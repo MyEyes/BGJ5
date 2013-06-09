@@ -27,7 +27,7 @@ namespace Bacon_Game_Jam_5
         {
             this.GraphicsDevice = GraphicsDevice;
 
-            sceneBuffer = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            sceneBuffer = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth16);
             cam = new Camera(new Vector2(100, 100), GraphicsDevice.Viewport.Bounds);
             map = new Map(Content);
             map.lightMap = new Lightmap(GraphicsDevice, Content);
@@ -38,18 +38,25 @@ namespace Bacon_Game_Jam_5
 
             Random rand = new Random();
             
+            /*
             for (int x = 0; x < 15; x++)
             {
                 int offset = 30*Map.TileSize;
                 Enemy enemy = new Enemy(new Vector2(offset + (float)rand.NextDouble() * (Map.SizeX * Map.TileSize - offset), offset + (float)rand.NextDouble() * (Map.SizeY * Map.TileSize - offset)), map, Content);
                 map.Objects.Add(enemy);
             }
-             /*
+             */
+             
+             
+             
+            
             Enemy enemy = new Enemy(new Vector2(160, 160), map, Content);
             enemy.Health = 200;
             map.Objects.Add(enemy);
             lastEnemy = enemy;
-              */
+             
+             
+              
 
             for (int x = 0; x < 20; x++)
             {
@@ -101,6 +108,7 @@ namespace Bacon_Game_Jam_5
                 {
                     lastEnemy = llEnemy;
                     llEnemy.Health = 20000;
+                    Sounds.PlaySound("eviljest");
                 }
                 else if (EnemyCount == 0)
                 {
@@ -131,7 +139,7 @@ namespace Bacon_Game_Jam_5
             GraphicsDevice.SetRenderTarget(sceneBuffer);
             GraphicsDevice.Clear(Color.Black);
 
-            map.Draw(cam, batch, BlendState.Opaque);
+            map.Draw(cam, batch, BlendState.AlphaBlend);
             map.lightMap.DrawLightmap(batch);
             GraphicsDevice.SetRenderTarget(null);
 

@@ -14,8 +14,9 @@ namespace Bacon_Game_Jam_5
         GameObject _target;
         float countdown;
         Light light;
+        bool _sound;
 
-        public AntiLightParticle(Vector2 position, Vector2 direction, GameObject target, Map map, ContentManager Content)
+        public AntiLightParticle(Vector2 position, Vector2 direction, GameObject target, Map map, ContentManager Content, bool sound=false)
             : base(map, Content)
         {
             Position = position;
@@ -29,6 +30,7 @@ namespace Bacon_Game_Jam_5
                 light.Position = Position;
                 light.Color = Color.White;
             }
+            _sound = sound;
         }
 
         public override void Update(float seconds)
@@ -49,7 +51,11 @@ namespace Bacon_Game_Jam_5
                 {
                     Player p = _target as Player;
                     if (p != null)
+                    {
                         p.Health -= 0.5f;
+                        //if (_sound)
+                          //  Sounds.PlaySoundInstance("hit2", -1);
+                    }
                     Done();
                     
                 }

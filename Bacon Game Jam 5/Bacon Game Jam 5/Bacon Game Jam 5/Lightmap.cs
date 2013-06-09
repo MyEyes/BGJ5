@@ -265,8 +265,8 @@ namespace Bacon_Game_Jam_5
 
         public void DrawLightmap(SpriteBatch batch)
         {
-            batch.Begin(SpriteSortMode.Immediate,_multiplicative);
-            batch.Draw(_lightMap, Vector2.Zero, Color.White);
+            batch.Begin(SpriteSortMode.Immediate, _multiplicative, null, DepthStencilState.DepthRead, null);
+            batch.Draw(_lightMap, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.4f);
             batch.End();
         }
 

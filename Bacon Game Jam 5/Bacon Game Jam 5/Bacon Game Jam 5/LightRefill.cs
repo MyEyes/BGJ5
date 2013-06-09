@@ -45,7 +45,7 @@ namespace Bacon_Game_Jam_5
                     Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
                     dir.Normalize();
                     dir *= 5;
-                    LightParticle lp = new LightParticle(Position, dir, p,Color.White, _map, null);
+                    LightParticle lp = new LightParticle(Position, dir, p,Color.White, _map, null,true);
                     _map.Objects.Add(lp);
                     RefillLeft -= 10;
                     coolDown = coolDownTime;

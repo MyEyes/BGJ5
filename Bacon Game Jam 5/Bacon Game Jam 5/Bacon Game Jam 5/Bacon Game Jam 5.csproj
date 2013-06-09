@@ -125,6 +125,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="RageTrigger.cs" />
     <Compile Include="ScreenManager.cs" />
+    <Compile Include="Sounds.cs" />
     <Compile Include="YouWinScreen.cs" />
   </ItemGroup>
   <ItemGroup>

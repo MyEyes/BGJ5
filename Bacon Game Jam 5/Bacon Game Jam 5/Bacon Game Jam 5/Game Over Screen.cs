@@ -27,7 +27,7 @@ namespace Bacon_Game_Jam_5
 
         public void Initialize(GraphicsDevice device, ContentManager Content)
         {
-            _font = Content.Load<SpriteFont>("font");
+            _font = Content.Load<SpriteFont>("DarkFont");
             _device = device;
         }
 

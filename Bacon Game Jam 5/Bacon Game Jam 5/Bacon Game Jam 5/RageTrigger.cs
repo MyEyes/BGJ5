@@ -13,6 +13,7 @@ namespace Bacon_Game_Jam_5
     {
         Light light;
         float lifeCountdown=0.5f;
+        int bleeps = 0;
 
         public RageTrigger(Vector2 position, Map map, ContentManager content):base(map,content)
         {
@@ -32,7 +33,7 @@ namespace Bacon_Game_Jam_5
                 Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
                 dir.Normalize();
                 dir *= 5;
-                LightParticle light = new LightParticle(Position, dir, p, Color.Red, _map, null);
+                LightParticle light = new LightParticle(Position, dir, p, Color.Red, _map, null, bleeps++ % 8 == 0);
                 lifeCountdown -= seconds;
                 _map.Objects.Add(light);
                 if (lifeCountdown < 0)

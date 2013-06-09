@@ -15,6 +15,7 @@ namespace Bacon_Game_Jam_5
         SpriteFont _font;
         
         GraphicsDevice _device;
+        ContentManager _content;
 
         Map _dummyMap;
         Camera _dummyCam;
@@ -34,6 +35,7 @@ namespace Bacon_Game_Jam_5
 
         public void Initialize(GraphicsDevice device, ContentManager Content)
         {
+            _content = Content;
             _font = Content.Load<SpriteFont>("font");
             _device = device;
             _dummyMap = new Map(Content);
@@ -73,7 +75,10 @@ namespace Bacon_Game_Jam_5
 
             if (phase == 0)
             {
-
+                player1.Health = 250;
+                player2.Health = 250;
+                player3.Health = 250;
+                player4.Health = 250;
             }
             else if (phase == 1)
             {
@@ -86,7 +91,7 @@ namespace Bacon_Game_Jam_5
             else if (phase == 2)
             {
                 _dummyCam.Move((player4.Position - _dummyCam.Position)*0.01f);
-                player4.Health = 100;
+                player4.Health = 250;
             }
 
             _dummyMap.Update(seconds);
@@ -98,11 +103,12 @@ namespace Bacon_Game_Jam_5
             switch (phase)
             {
                 case 0:
+                    _font = _content.Load<SpriteFont>("DarkFont");
                     phase = 1;
                     phaseCountdown = 15;
                     PhaseTime = 15;
                     Text = "But then...                                                                                    \nDarkness came\n                                                     \nAnd it swallowed up all that was good!";
-                    enemy = new Enemy(new Vector2(2000, 2000)+offset, _dummyMap, null);
+                    enemy = new Enemy(new Vector2(2000, 2000)+offset, _dummyMap, _content);
                     enemy.targetPos = new Vector2(500, 500)+offset;
                     enemy.speed = 2;
                     enemy.countDown = 1000;
@@ -115,7 +121,7 @@ namespace Bacon_Game_Jam_5
                     phaseCountdown = 20;
                     PhaseTime = 20;
                     Text = "You are the last hope...                  \nYou are the last light\nthat has not been found!                         \nHelp your brothers and sisters!                         \nLET THE LIGHTS OUT!";
-                    enemy = new Enemy(player4.Position+new Vector2(1000,0), _dummyMap, null);
+                    enemy = new Enemy(player4.Position+new Vector2(1000,0), _dummyMap, _content);
                     enemy.targetPos = player4.Position+new Vector2(500,0);
                     enemy.speed = 2;
                     enemy.countDown = 1000;
@@ -123,7 +129,7 @@ namespace Bacon_Game_Jam_5
                     enemy.collides = false;
                     enemy.follow = false;
                     _dummyMap.Objects.Add(enemy);
-                    enemy = new Enemy(player4.Position+new Vector2(0,1000), _dummyMap, null);
+                    enemy = new Enemy(player4.Position+new Vector2(0,1000), _dummyMap, _content);
                     enemy.targetPos = player4.Position+new Vector2(0,500);
                     enemy.speed = 2;
                     enemy.Health = 3000;
@@ -144,7 +150,7 @@ namespace Bacon_Game_Jam_5
         {
             _dummyMap.lightMap.DrawLights(_dummyCam, batch, _dummyMap);
             _device.Clear(Color.Black);
-            _dummyMap.Draw(_dummyCam, batch, BlendState.Opaque);
+            _dummyMap.Draw(_dummyCam, batch, BlendState.AlphaBlend);
             _dummyMap.lightMap.DrawLightmap(batch);
 
             batch.Begin();
@@ -160,10 +166,10 @@ namespace Bacon_Game_Jam_5
 
             batch.DrawString(_font, Text.Substring(0, length), new Vector2(10, 10), color);
             if (phaseCountdown <= 0 && phase==2)
-                batch.DrawString(_font, "Press SPACE to START", new Vector2(20, 430), color);
+                batch.DrawString(_font, "Press Space to START", new Vector2(20, 430), color);
             else if(phaseCountdown<=0)
-                batch.DrawString(_font, "Press SPACE to continue", new Vector2(20, 430), color);
-            batch.DrawString(_font, "ESC ->", new Vector2(660, 430), color);
+                batch.DrawString(_font, "Press Space to continue", new Vector2(20, 430), color);
+            batch.DrawString(_font, "Esc ->", new Vector2(660, 430), color);
 
             batch.End();
         }

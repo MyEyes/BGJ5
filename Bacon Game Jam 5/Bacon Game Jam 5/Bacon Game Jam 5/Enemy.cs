@@ -28,15 +28,21 @@ namespace Bacon_Game_Jam_5
 
         public bool collides = true;
 
+        Texture2D _eyes;
+        Vector2 _eyeOffset;
+        int attackCounter = 0;
+
         public Enemy(Vector2 pos, Map map, ContentManager Content):base(map,Content)
         {
             light = map.lightMap.GetAntiLight();
             light.Radius = Health / 5.0f;
             light.Color = Color.White;
             light.Position = pos;
-            Size = new Vector2(5, 5);
+            Size = new Vector2(24, 24);
             Position = pos;
             mode = EnemyMode.RandomWalk;
+            _eyeOffset = -Size / 2 + new Vector2(1, 0);
+            _eyes = Content.Load<Texture2D>("Eyes");
             NewTargetPos();
         }
 
@@ -70,7 +76,8 @@ namespace Bacon_Game_Jam_5
                     Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
                     dir.Normalize();
                     dir *= 5;
-                    AntiLightParticle alp = new AntiLightParticle(Position, dir, p, _map, null);
+                    AntiLightParticle alp = new AntiLightParticle(Position, dir, p, _map, null, attackCounter%8==0);
+                    attackCounter++;
                     _map.Objects.Add(alp);
                     if (follow)
                     {
@@ -109,6 +116,7 @@ namespace Bacon_Game_Jam_5
         {
             _map.Objects.Remove(this);
             light.Radius = 0;
+            Sounds.PlaySound("DeathFlash");
             for (int x = 0; x < 40; x++)
             {
                 Vector2 dir = new Vector2((float)(2 * _rand.NextDouble() - 1), (float)(2 * _rand.NextDouble() - 1));
@@ -131,6 +139,11 @@ namespace Bacon_Game_Jam_5
                 _map.Objects.Add(alp);
             }
 
+        }
+
+        public override void Draw(SpriteBatch batch)
+        {
+            //batch.Draw(_eyes, Position + _eyeOffset, null, Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0.3f);
         }
     }
 }

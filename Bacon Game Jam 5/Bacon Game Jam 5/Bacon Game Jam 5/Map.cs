@@ -27,6 +27,8 @@ namespace Bacon_Game_Jam_5
         public const int SizeX = 150;
         public const int SizeY = 150;
 
+        AlphaTestEffect ate;
+
         public Lightmap lightMap;
 
         public const int TileSize = 32;
@@ -54,6 +56,16 @@ namespace Bacon_Game_Jam_5
 
         public void Draw(Camera cam, SpriteBatch batch, BlendState blend)
         {
+            if (ate == null)
+            {
+                ate = new AlphaTestEffect(batch.GraphicsDevice);
+                ate.ReferenceAlpha = 128;
+                ate.FogEnabled = false;
+                ate.VertexColorEnabled = true;
+            }
+            ate.World = Matrix.Identity;
+            ate.View = cam.ViewMatrix;
+            ate.Projection = cam.ProjectionMatrix;
             int startX = cam.ViewSpace.X / TileSize;
             if (startX < 0) startX = 0;
             if (startX >= SizeX) startX = SizeX - 1;
@@ -68,7 +80,7 @@ namespace Bacon_Game_Jam_5
             int endY = cam.ViewSpace.Height / TileSize + startY + 2;
             if (endY >= SizeY) endY = SizeY - 1;
 
-            batch.Begin(SpriteSortMode.Immediate, blend, null, DepthStencilState.Default, null, null, cam.ViewMatrix);
+            batch.Begin(SpriteSortMode.Immediate, blend, null, DepthStencilState.Default, null, ate, Matrix.Identity);
 
             for (int layer = 0; layer < 2; layer++)
                 for (int x = startX; x <= endX; x++)

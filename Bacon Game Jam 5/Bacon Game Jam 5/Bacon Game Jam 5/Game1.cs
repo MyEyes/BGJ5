@@ -49,6 +49,8 @@ namespace Bacon_Game_Jam_5
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Sounds.SetUp(Content);
+
             manager = new ScreenManager(GraphicsDevice, Content);
 
             manager.Add(new IntroScreen());

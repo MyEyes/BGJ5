@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,8 +16,9 @@ namespace Bacon_Game_Jam_5
         float countdown;
         Light light;
         Color _color;
+        bool _sound;
 
-        public LightParticle(Vector2 position, Vector2 direction, GameObject target, Color color, Map map, ContentManager Content)
+        public LightParticle(Vector2 position, Vector2 direction, GameObject target, Color color, Map map, ContentManager Content, bool sound=false)
             : base(map, Content)
         {
             Position = position;
@@ -31,6 +33,7 @@ namespace Bacon_Game_Jam_5
                 light.Position = Position;
                 light.Color = color;
             }
+            _sound = sound;
         }
 
         public override void Update(float seconds)
@@ -55,12 +58,25 @@ namespace Bacon_Game_Jam_5
                     if (_color == Color.Red)
                         damage = 10;
                     Enemy e = _target as Enemy;
-                    if (e != null)
+                    if (e != null && e.Health>0)
+                    {
                         e.Health -= damage;
+                        if (_sound)
+                        {
+                            Sounds.PlaySoundInstance("hit1",-1);
+                        }
+                        Done();
+                    }
                     Player p = _target as Player;
                     if (p != null)
+                    {
                         p.Health += damage;
-                    Done();
+                        if (_sound)
+                        {
+                            Sounds.PlaySoundInstance("beep");
+                        }
+                        Done();
+                    }
                 }
                 float speed = _direction.Length();
                 Vector2 diff = _target.Position-Position;
