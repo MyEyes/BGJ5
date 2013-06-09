@@ -46,7 +46,6 @@ namespace Bacon_Game_Jam_5
             targetPitch = -1;
             pitch = -1;
             
-            
             //Comment this out an uncomment the bit below to test the Win Screen
             
             for (int x = 0; x < 15; x++)
@@ -64,8 +63,7 @@ namespace Bacon_Game_Jam_5
             lastEnemy = enemy;
              */
              
-              
-
+             
             for (int x = 0; x < 8; x++)
             {
                 LightRefill refill = new LightRefill(new Vector2((float)rand.NextDouble() * Map.SizeX * Map.TileSize, (float)rand.NextDouble() * Map.SizeY * Map.TileSize), map, Content);
