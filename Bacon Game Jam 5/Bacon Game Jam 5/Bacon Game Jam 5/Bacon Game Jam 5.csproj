@@ -138,8 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bacon Game Jam 5Content\Bacon Game Jam 5Content.contentproj">
-      <Name>Bacon_Game_Jam_5Content</Name>
+      <Name>Bacon Game Jam 5Content %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{D199D999-7895-41FB-9057-105CF7CF590F}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

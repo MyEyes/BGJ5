@@ -1,0 +1,27 @@
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\SDL.dll
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Readme.txt
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Bacon Game Jam 5 Linux.exe
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Bacon Game Jam 5 Linux.pdb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Lidgren.Network.dll
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\MonoGame.Framework.dll
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\OpenTK.dll
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Tao.Sdl.dll
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\obj\x86\Release\Bacon Game Jam 5 Linux.exe
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\obj\x86\Release\Bacon Game Jam 5 Linux.pdb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\Ambience.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\Bacon.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\beep.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\Berserk.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\DarkFont.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\DeathFlash.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\eviljest.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\fanfare.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\font.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\Heartbeat.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\hit1.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\LightEffect.mgfx
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\noise.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\ShatterEffect.mgfx
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\TileSet.xnb
+C:\Users\Ole\Documents\BGJ5\BGJ5\Bacon Game Jam 5\Bacon Game Jam 5 Linux\bin\WindowsGL\Release\Content\Well_Done.xnb

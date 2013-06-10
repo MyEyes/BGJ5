@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bacon Game Jam 5", "Bacon Game Jam 5\Bacon Game Jam 5\Bacon Game Jam 5.csproj", "{40D3D868-2EBC-4B8F-972E-2C20EBF4CEC8}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Bacon Game Jam 5Content", "Bacon Game Jam 5\Bacon Game Jam 5Content\Bacon Game Jam 5Content.contentproj", "{D199D999-7895-41FB-9057-105CF7CF590F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bacon Game Jam 5Content", "Bacon Game Jam 5\Bacon Game Jam 5Content\Bacon Game Jam 5Content.contentproj", "{D199D999-7895-41FB-9057-105CF7CF590F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bacon Game Jam 5 Mono", "Bacon Game Jam 5 Mono\Bacon Game Jam 5 Mono.csproj", "{58CBACCD-27D7-4AE7-8A5E-D0E3D99BADE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bacon Game Jam 5 Linux", "Bacon Game Jam 5 Linux\Bacon Game Jam 5 Linux.csproj", "{39A46BCB-8557-449F-8296-C3812C6F7D16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +21,14 @@ Global
 		{40D3D868-2EBC-4B8F-972E-2C20EBF4CEC8}.Release|x86.Build.0 = Release|x86
 		{D199D999-7895-41FB-9057-105CF7CF590F}.Debug|x86.ActiveCfg = Debug|x86
 		{D199D999-7895-41FB-9057-105CF7CF590F}.Release|x86.ActiveCfg = Release|x86
+		{58CBACCD-27D7-4AE7-8A5E-D0E3D99BADE6}.Debug|x86.ActiveCfg = Debug|x86
+		{58CBACCD-27D7-4AE7-8A5E-D0E3D99BADE6}.Debug|x86.Build.0 = Debug|x86
+		{58CBACCD-27D7-4AE7-8A5E-D0E3D99BADE6}.Release|x86.ActiveCfg = Release|x86
+		{58CBACCD-27D7-4AE7-8A5E-D0E3D99BADE6}.Release|x86.Build.0 = Release|x86
+		{39A46BCB-8557-449F-8296-C3812C6F7D16}.Debug|x86.ActiveCfg = Debug|x86
+		{39A46BCB-8557-449F-8296-C3812C6F7D16}.Debug|x86.Build.0 = Debug|x86
+		{39A46BCB-8557-449F-8296-C3812C6F7D16}.Release|x86.ActiveCfg = Release|x86
+		{39A46BCB-8557-449F-8296-C3812C6F7D16}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
